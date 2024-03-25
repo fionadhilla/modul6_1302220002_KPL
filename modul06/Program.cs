@@ -10,8 +10,10 @@ public class SayaTubeVideo
     {
         if (string.IsNullOrEmpty(title))
             throw new ArgumentNullException("Judul video tidak boleh null.");
-        if (title.Length > 100)
+        if (title.Length > 200)
             throw new ArgumentOutOfRangeException("Panjang judul video maksimal 100 karakter.");
+        
+       
 
         Random random = new Random();
         this.id = random.Next(10000, 99999);
@@ -23,10 +25,9 @@ public class SayaTubeVideo
 
     public void IncreasePlayCount(int increaseAmount)
     {
-        if (increaseAmount <= 0)
-            throw new ArgumentOutOfRangeException("Penambahan play count minimal 1.");
-        if (increaseAmount > 10000000)
-            throw new ArgumentOutOfRangeException("Penambahan play count maksimal 10.000.000.");
+        if (increaseAmount < 0)
+            throw new ArgumentOutOfRangeException("Penambahan play count tidak boleh negatif");
+       
         //playCount += increaseAmount;
 
         try
@@ -67,6 +68,7 @@ public class SayaTubeVideo
         SayaTubeUser user = new SayaTubeUser("Fionadhilla");
 
         SayaTubeVideo video = new SayaTubeVideo("Review film A oleh Fionadhilla");
+        video.IncreasePlayCount(1234567890);
         user.AddVideo(video);
         SayaTubeVideo video2 = new SayaTubeVideo("Review film B oleh Fionadhilla");
         user.AddVideo(video2);
@@ -87,6 +89,9 @@ public class SayaTubeVideo
         SayaTubeVideo video10 = new SayaTubeVideo("Review film J oleh Fionadhilla");
         user.AddVideo(video10);
         user.PrintAllVideoPlayCount();
+
+        //video.IncreasePlayCount(1234567890);
+        //video.getPlayCount();
 
         //video.IncreasePlayCount(10);
         //video.PrintVideoDetails();

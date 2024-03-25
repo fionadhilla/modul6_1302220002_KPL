@@ -28,6 +28,10 @@
 
     public void AddVideo(SayaTubeVideo video)
     {
+        if (video == null)
+            throw new ArgumentException("video tidak boleh null");
+        if (video.getPlayCount() > int.MaxValue)
+            throw new ArgumentOutOfRangeException("play count melebihi bilangan integer maksimum");
         listVideo.Add(video);
     }
 
@@ -35,7 +39,7 @@
     {
         Console.WriteLine($"User: {username}");
 
-        for (int i = 0; i < listVideo.Count; i++)
+        for (int i = 0; i < 7; i++)
         {
             Console.WriteLine($"Video {i+1} judul: {listVideo[i].getTitle()}");
         }
